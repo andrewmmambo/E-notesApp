@@ -1,13 +1,3 @@
-// getUsers button 
-document.getElementById("btn-GetUsers").addEventListener('click', getAllUsers);
-  
-function getAllUsers() { 
-   fetch("http://localhost:3000/users/login")
-   .then((res)=> res.json())
-   .then((data) => console.log(data))
-   .catch((err)=> console.log(err))
- }
-
 async function fetchData(route = '', data = {}, methodType) {
     const response = await fetch(`http://localhost:3000${route}`, {
       method: methodType, // *GET, POST, PUT, DELETE, etc.
@@ -62,9 +52,9 @@ async function fetchData(route = '', data = {}, methodType) {
     })
     
   let RegisterForm = document.getElementById("reg-Form");
-  if(RegisterForm) RegisterForm.addEventListener('submit', register);
+  if(RegisterForm) RegisterForm.addEventListener('submit', registerUser);
   
-  function register(e) {
+  function registerUser(e) {
     e.preventDefault();
   
     let fname = document.getElementById("fname").value;
@@ -72,7 +62,7 @@ async function fetchData(route = '', data = {}, methodType) {
     let password = document.getElementById("pwd").value;
     let user = new User(fname, email, password);
   
-    fetchData("/users/register", user, "POST")
+    fetchData("/users/registerUser", user, "POST")
     .then((data) => {
       console.log(data);
       window.location.href = "login.html";
@@ -84,15 +74,11 @@ async function fetchData(route = '', data = {}, methodType) {
 
   // note class
   class Note {
-    constructor(note) {
-      this.note = note;
+    constructor(noteContent) {
+      this.noteContent = noteContent;
     }
-  
-    getEmail() {
-        return this.email;
-      }
-    }
-    
+  }
+     
     // grab the form, add event listener
     let NoteForm = document.getElementById("note-Form");
     if(NoteForm) NoteForm.addEventListener('submit', note);
@@ -100,13 +86,13 @@ async function fetchData(route = '', data = {}, methodType) {
     function note(e) {
       e.preventDefault();
     
-      let notes = document.getElementById("note").value;
-      let note = new Note(notes);
+      let noteContent = document.getElementById("noteContent").value;
+      let note = new Note(noteContent);
     
       fetchData("/users/note", note, "POST")
       .then((data) => {
         console.log(data);
-        window.location.href = "login.html";
+        window.location.href = "note.html";
       })
       .catch((err) => {
         console.log(`Error!!! ${err.message}`)
