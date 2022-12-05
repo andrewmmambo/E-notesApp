@@ -20,23 +20,24 @@ async function getAllUsers()
     console.log(allUsers);
  }
 
-async function registerUser(fname, email, password)
+async function registerUser(user)
 {
     let cUser = await getUser(user.email);
     if(cUser.length > 0) throw Error("Email already in use");
 
     const sql = `INSERT INTO users(fname, email, password)
-               VALUES('${fname}','${email}','${password}');`;
+               VALUES('${user.fname}','${user.email}','${user.password}');`;
      await con.query(sql);
-    return await login(email, password);
+    return await login(user);
 }
 
 async function getUser(user)
 {
     let sql;
-    if(user.userId){
+    console.log(user)
+    if(user.user_id){
         sql =`SELECT * FROM users
-        WHERE user_id = ${user.userId};`
+        WHERE user_id = ${user.user_id};`
     }else {
         sql = `SELECT * FROM users
         WHERE email = "${user.email}";`
@@ -47,26 +48,28 @@ async function getUser(user)
 async function editUser(user)
 {
     const sql = `UPDATE users SET email = "${user.email}"
-    WHERE user_id = ${user.userId}`;
+    WHERE user_id = ${user.user_id}`;
 
     await con.query(sql);
     let updatedUser = await getUser(user);
     return updatedUser[0];
 }
 
-async function deleteUser(userId) {
-    const sql = `DELETE FROM users
-    WHERE user_id = ${userId}`;
+async function deleteUser(user)
+{
+    let sql = `DELETE FROM users
+    WHERE user_id = ${user.user_id}
+    `
     await con.query(sql);
 }
 
-async function login(email, password)
+async function login(user)
 {
-    const user = await userExists(email);
-    if(!user [0]) throw Error('User not found');
-    if(user [0].user_password !== password) throw Error('Password is incorrect.');
+    const cUser = await getUser(user);
+    if(!cUser [0]) throw Error('User not found');
+    if(cUser [0].password !== user.password) throw Error('Password is incorrect.');
 
-    return user [0];
+    return cUser [0];
 }
 
 module.exports = { getAllUsers, registerUser, getUser, editUser, deleteUser, login };

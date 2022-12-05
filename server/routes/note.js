@@ -3,6 +3,16 @@ const Note = require('../models/note');
 const router = express.Router();
 
 router
+    .post('/create', async (req, res) =>{
+        try{
+            const note = await Note.createNote(req.body);
+            res.send(note);
+        }
+        catch(err) {
+            res.status(401).send({message: err.message});
+        }
+    })
+
     .get('/read', async (req, res) => {
         try {
         const notes = await Note.getNote();
@@ -16,17 +26,17 @@ router
         try {
             const note =  await Note.editNote(req.body);
             res.send({...note, password: undefined});
-        } catch(error){
-            res.status(401).send({message: error.message});
+        } catch(err){
+            res.status(401).send({message: err.message});
         }
     })
 
     .delete('/delete', async (req, res) => {
         try {
-            Note.deleteNote(req.body.noteId);
+            Note.deleteNote(req.body);
             res.send({success: "Note deleted Successfully"});
-        }catch(error) {
-            res.status(401).send({message: error.message});
+        }catch(err) {
+            res.status(401).send({message: err.message});
         }
     })
 

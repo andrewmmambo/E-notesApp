@@ -5,8 +5,8 @@ const router = express.Router();
 router
     .get('/', async (req, res) =>{
         try {
-            const users = await User.getAllUsers();
-            res.send(users);
+            const user = await User.getAllUsers();
+            res.send(user);
         } catch(err) {
             res.status(401).send({message: err.message});
         }
@@ -14,21 +14,21 @@ router
 
     .post('/login', async (req, res) =>{
         try{
-            const user = await User.login(req.body.email, req.body.password);
+            const user = await User.login(req.body);
             res.send( { ...user, password: undefined } );
         }
-        catch(error) {
-            res.status(401).send({message: error.message});
+        catch(err) {
+            res.status(401).send({message: err.message});
         }
     })
 
     .post('/registerUser', async (req, res) =>{
         try{
-            const user = await User.registerUser(req.body.fname, req.body.email, req.body.password);
+            const user = await User.registerUser(req.body);
             res.send( { ...user, password: undefined } );
         }
-        catch(error) {
-            res.status(401).send({message: error.message});
+        catch(err) {
+            res.status(401).send({message: err.message});
         }
     })
 
@@ -36,18 +36,18 @@ router
         try {
             const user = await User.editUser(req.body);
             res.send({...user, password: undefined});
-        } catch(error){
-            res.status(401).send({message: error.message});
+        } catch(err){
+            res.status(401).send({message: err.message});
         }
-})
+    })
 
-.delete('/delete', async (req, res) => {
-    try {
-        User.deleteUser(req.body.userId);
-        res.send({success: "User deleted Successfully"});
-    }catch(error) {
-        res.status(401).send({message: error.message});
-    }
-})
+    .delete('/delete', async (req, res) => {
+        try {
+            User.deleteUser(req.body);
+            res.send({success: "User deleted Successfully"});
+        }catch(err) {
+            res.status(401).send({message: err.message});
+        }
+    })
 
 module.exports = router;
