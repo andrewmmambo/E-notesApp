@@ -44,12 +44,16 @@ async function fetchData(route = '', data = {}, methodType) {
   
     fetchData("/users/login", user, "POST")
     .then((data) => {
-      console.log(data);
+      setCurrentUser(data);
       window.location.href = "note.html";
     })
     .catch((err) => {
-      console.log(`Error!!! ${err.message}`)
-    })
+      const errText = err.message;
+//      document.querySelector("#login-Form p.err").innerHTML = errText;
+//      document.getElementById("pwd").value = "";
+      console.log(`Error!!! ${errText}`)
+    }); 
+  }
     
   let RegisterForm = document.getElementById("reg-Form");
   if(RegisterForm) RegisterForm.addEventListener('submit', registerUser);
@@ -64,12 +68,38 @@ async function fetchData(route = '', data = {}, methodType) {
   
     fetchData("/users/registerUser", user, "POST")
     .then((data) => {
+      setCurrentUser(data);
       console.log(data);
-      window.location.href = "login.html";
+      window.location.href = "note.html";
     })
     .catch((err) => {
-      console.log(`Error!!! ${err.message}`)
-    })  
+      const errText = err.message;
+ //     document.querySelector("#reg-Form p.err").innerHTML = errText;
+ //     document.getElementById("pwd").value = "";
+      console.log(`Error!!! ${errText}`)
+    });  
+  }
+
+  // logout event listener
+  let logout = document.getElementById("logout-btn");
+  if(logout) logout.addEventListener('click', removeCurrentUser)
+
+  //stateful mechanism for user
+  // logging in a user
+
+  function setCurrentUser(user)
+  {
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  function getCurrentUser()
+  {
+    return JSON.parse(localStorage.getItem('user'));
+  }
+
+  function removeCurrentUser()
+  {
+    localStorage.removeItem('user');
   }
 
   // note class
@@ -91,11 +121,12 @@ async function fetchData(route = '', data = {}, methodType) {
     
       fetchData("/users/note", note, "POST")
       .then((data) => {
-        console.log(data);
+        setCurrentUser(data);
         window.location.href = "note.html";
       })
       .catch((err) => {
-        console.log(`Error!!! ${err.message}`)
-      })
-    }
+        const errText = err.message;
+ //       document.querySelector("#note-Form p.err").innerHTML = errText;
+        console.log(`Error!!! ${errText}`)
+      }); 
   }

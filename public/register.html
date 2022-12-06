@@ -7,19 +7,19 @@
     <meta name="author" content="Marima Andrew Mambondiumwe">
     <link rel="stylesheet" href="style.css">
     <title>Register</title>
-    <script type="module" defer src="main.js"></script>  
 </head>
 <body>
     <div class="nav">
         <a class="active" href="register.html">Register</a>
         <a href="login.html">Login</a>
-        <a href="note.html">Note</a>       
-    </div>
-    <h2>REGISTER</h2>
+        <a href="note.html">Note</a>    
+    </div>   
     <br>
     <section class="container"></section>
     <div class="regtxtboxes">
-        <form id="reg-Form">          
+        <form id="reg-Form">
+            <p class="error"></p> 
+            <h2>REGISTER</h2>                   
             <label for="fname">First Name:</label>
             <input type="text" id="fname"  name="fname">
             <br>
@@ -31,13 +31,14 @@
             <label for="pwd">Password:</label>
             <input type="password" id="pwd"  name="pwd">
             <br>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Register">
         </form>
     </div>  
     </section> 
 </body>
 <br>
 <footer>
+    <script type="module" defer src="main.js"></script>  
     &copy;Marima Andrew Mambondiumwe
  </footer>
 </html>

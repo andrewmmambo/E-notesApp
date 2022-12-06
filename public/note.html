@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Marima Andrew Mambondiumwe">
     <link rel="stylesheet" href="style.css">
-    <title>Note</title> 
-    <script type="module" defer src="main.js"></script>    
+    <title>Note</title>   
 </head>
 <body>
     <div class="nav">
         <a class="active" href="note.html">Note</a>
          <a href="register.html">Register</a>
          <a href="login.html">Login</a>
+         <a id="logout-btn">Logout</a>
      </div>
     <h2>NOTES</h2>
     <br>
@@ -21,7 +21,8 @@
         <div class="photo">
             <img src="images/notes.jpg" alt="pic of notes">        
         <br>
-        <form id="note-Form">            
+        <form id="note-Form">
+            <p class="error"></p>            
             <label for="note">Type notes below:</label>
             <br>
             <textarea name="noteContent" id="noteContent" cols="50" rows="8"></textarea>
@@ -33,6 +34,7 @@
 </body>
 <br>
 <footer>
+    <script type="module" defer src="main.js"></script>
     &copy;Marima Andrew Mambondiumwe
  </footer>
 </html>
