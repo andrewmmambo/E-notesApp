@@ -111,15 +111,15 @@ async function fetchData(route = '', data = {}, methodType) {
      
     // grab the form, add event listener
     let NoteForm = document.getElementById("note-Form");
-    if(NoteForm) NoteForm.addEventListener('submit', note);
+    if(NoteForm) NoteForm.addEventListener('submit', createNote);
     
-    function note(e) {
+    function createNote(e) {
       e.preventDefault();
     
       let noteContent = document.getElementById("noteContent").value;
       let note = new Note(noteContent);
     
-      fetchData("/users/note", note, "POST")
+      fetchData("/notes/createNote", note, "POST")
       .then((data) => {
         setCurrentUser(data);
         window.location.href = "note.html";
@@ -129,4 +129,4 @@ async function fetchData(route = '', data = {}, methodType) {
  //       document.querySelector("#note-Form p.err").innerHTML = errText;
         console.log(`Error!!! ${errText}`)
       }); 
-  }
+    }
