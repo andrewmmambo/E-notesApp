@@ -36,12 +36,16 @@ label {
     position:relative;
 }
 
-.nav {
-    background-color: black;
+nav ul {
+    background-color: rgba(8, 6, 5, 0.726);
     overflow: hidden;
+     list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 3px;
 }
   
-.nav a {
+nav ul li a {
     font-size: 17px;
     color: deepskyblue;
     text-decoration: none;
@@ -51,13 +55,13 @@ label {
     float:left;
 }
 
-.nav a:hover {
+nav ul li a:hover {
     background-color:deepskyblue;
     color: black;
     font-weight: bold;
 }
 
-.nav .active {
+nav ul li .active {
     background-color:purple;
     font-weight: bold;
 }
@@ -95,3 +99,32 @@ footer{
     height: 50px;
     text-align: center;
 }
+
+/* == profile page ==================== */
+  
+  #profile h2 {
+    padding-top: 20px;
+    text-align: center;
+  }
+  
+  #profile div {
+    width: fit-content;
+    margin: 30px auto;
+  }
+  
+  
+  .btn:hover {
+    cursor: pointer;
+    background-color: rgb(102, 102, 9);
+    box-shadow: 0 2px 5px lightgrey;
+  }
+  
+  #editForm {
+    width: fit-content;
+    margin: 40px auto;
+  }
+  
+  #editForm form {
+    display: inline-block;
+    margin: 40px;
+  }
