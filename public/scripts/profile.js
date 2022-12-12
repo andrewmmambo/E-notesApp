@@ -14,7 +14,7 @@ if(deleteBtn) deleteBtn.addEventListener('click', deleteAccount);
 function deleteAccount() {
 
   if(confirm("Are you sure you want to delete your account???")) {
-    fetchData("/users/delete", user, "DELETE")
+    fetchData("/users/deleteUser", user, "DELETE")
     .then((data) => {
       console.log(data);
       removeCurrentUser();
@@ -34,7 +34,7 @@ function editUser(e) {
   let username = document.getElementById('username').value;
   user.userName = username;
 
-  fetchData("/users/edit", user, "PUT")
+  fetchData("/users/editUser", user, "PUT")
   .then((data) => {
     console.log(data);
   })

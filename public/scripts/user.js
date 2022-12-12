@@ -1,4 +1,5 @@
-import { fetchData, setCurrentUser } from './main.js'
+import {fetchData, setCurrentUser} from './main.js'
+import { getNote } from './note.js'
 
 // user class
 class User {
@@ -28,6 +29,7 @@ class User {
     .then((data) => {
       setCurrentUser(data);
       window.location.href = "note.html";
+      window.onload = getNote();     
     })
     .catch((err) => {
         let p = document.querySelector('.error');

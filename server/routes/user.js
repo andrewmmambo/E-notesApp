@@ -3,7 +3,7 @@ const User = require('../models/user');
 const router = express.Router();
 
 router
-    .get('/', async (req, res) =>{
+    .get('/getAllUsers', async (req, res) =>{
         try {
             const user = await User.getAllUsers();
             res.send(user);
@@ -32,7 +32,7 @@ router
         }
     })
 
-    .put('/edit', async (req, res) => {
+    .put('/editUser', async (req, res) => {
         try {
             const user = await User.editUser(req.body);
             res.send({...user, password: undefined});
@@ -41,7 +41,7 @@ router
         }
     })
 
-    .delete('/delete', async (req, res) => {
+    .delete('/deleteUser', async (req, res) => {
         try {
             User.deleteUser(req.body);
             res.send({success: "User deleted Successfully"});

@@ -16,26 +16,20 @@ createTable();
 async function createNote(note)
 {
     let sql; 
-    sql =`INSERT INTO notes (noteContent)
-    VALUES ('${note.noteContent}')
-    WHERE user_id = ${user.user_id};`
+    sql =`INSERT INTO notes (noteContent, user_id)
+    VALUES ("${note.noteContent}", "${note.user_id}");`
     return con.query(sql);
 }
 
-async function getNote(note)
+async function getNote(user)
 {
     let sql;
-    if(note.note_id){
-        sql =`SELECT * FROM notes
-        WHERE note_id = ${note.note_id};`
-    }else {
-        sql = `SELECT * FROM notes
-        WHERE email = "${note.email}";`
-    }
+    sql =`SELECT * FROM notes
+        WHERE user_id = "${user.user_id}";`
     return con.query(sql);
 }
 
-async function editNote(note)
+/*async function editNote(note)
 {
     const sql = `UPDATE notes SET noteContent = "${note.noteContent}"
     WHERE note_id = ${note.note_id}`;
@@ -50,5 +44,5 @@ async function deleteNote(note) {
     WHERE note_id = ${note.note_id}`;
     con.query(sql);
 }
-
-module.exports = { createNote, getNote, editNote, deleteNote};
+*/
+module.exports = { createNote, getNote};
