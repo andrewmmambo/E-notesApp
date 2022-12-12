@@ -29,7 +29,12 @@ class User {
     .then((data) => {
       setCurrentUser(data);
       window.location.href = "note.html";
-      window.onload = getNote();     
+      window.onload = function()
+      {
+        getNote();
+        document.getElementById("getNote").click();
+      }
+        
     })
     .catch((err) => {
         let p = document.querySelector('.error');

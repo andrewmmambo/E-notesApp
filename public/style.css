@@ -84,6 +84,15 @@ container {
     font-size: small;
 }
 
+#getNote
+{
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px lightgrey;
+}
+
 container div{
     width: 100px;
     height: 100px;
@@ -111,7 +120,6 @@ footer{
     width: fit-content;
     margin: 30px auto;
   }
-  
   
   .btn:hover {
     cursor: pointer;

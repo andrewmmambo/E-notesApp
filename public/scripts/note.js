@@ -7,7 +7,6 @@ import { fetchData, getCurrentUser } from './main.js'
         this.noteContent = noteContent;
         }
     }
-     
     // grab the form, add event listener
     let NoteForm = document.getElementById("note-Form");
     if(NoteForm) NoteForm.addEventListener('submit', createNote);
@@ -29,19 +28,17 @@ import { fetchData, getCurrentUser } from './main.js'
         getCurrentUser(data);
         console.log(data);
         window.location.href = "note.html";
-//       window.onload = getNote();
       })
       .catch((err) => {
         let p = document.querySelector('.error');
         p.innerHTML = err.message;
       })
     }
-
+  if(user) getNote();
     let getNoteBtn = document.getElementById("getNote");
     if(getNoteBtn) getNoteBtn.addEventListener('click', getNote)
 
-    export function getNote(e) {
-        e.preventDefault();
+    export function getNote() {
         let user = getCurrentUser();
 
     fetchData("/notes/getNote", user, "POST")
